@@ -18,9 +18,9 @@
     "url": "git@github.com:eik-lib/esbuild-plugin.git"
   },
   "keywords": [
-    "rollup-plugin",
-    "rollup.js",
-    "rollup",
+    "esbuild-plugin",
+    "esbuild.js",
+    "esbuild",
     "import",
     "url",
     "esm"
