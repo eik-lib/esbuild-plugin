@@ -38,7 +38,7 @@
     "@semantic-release/github": "7.2.0",
     "@semantic-release/npm": "7.0.10",
     "@semantic-release/release-notes-generator": "9.0.1",
-    "esbuild": "0.8.51",
+    "esbuild": "0.9.0",
     "eslint": "7.20.0",
     "eslint-config-airbnb-base": "14.2.1",
     "eslint-plugin-import": "2.22.1",
