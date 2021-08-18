@@ -17,6 +17,9 @@
     "type": "git",
     "url": "git@github.com:eik-lib/esbuild-plugin.git"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "keywords": [
     "esbuild-plugin",
     "esbuild.js",
