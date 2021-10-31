@@ -1,3 +1,10 @@
+## [1.0.5](https://github.com/eik-lib/esbuild-plugin/compare/v1.0.4...v1.0.5) (2021-10-31)
+
+
+### Bug Fixes
+
+* **deps:** update dependency node-fetch to v2.6.6 ([bbbda53](https://github.com/eik-lib/esbuild-plugin/commit/bbbda53af52cbe0ace4505017285bb23f5d8d378))
+
 ## [1.0.4](https://github.com/eik-lib/esbuild-plugin/compare/v1.0.3...v1.0.4) (2021-09-22)
 
 
