@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/eik-lib/esbuild-plugin/compare/v1.0.5...v1.1.0) (2021-12-08)
+
+
+### Features
+
+* support loading eik config from package.json ([89c5127](https://github.com/eik-lib/esbuild-plugin/commit/89c5127a9a3df37c64705680c0199c05a5f9624e))
+
 ## [1.0.5](https://github.com/eik-lib/esbuild-plugin/compare/v1.0.4...v1.0.5) (2021-10-31)
 
 
