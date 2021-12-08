@@ -1,20 +1,8 @@
 /* eslint-disable no-restricted-syntax */
 
 import * as importMapPlugin from 'esbuild-plugin-import-map';
-import { join } from 'path';
 import fetch from 'node-fetch';
-import fs from 'fs';
-
-async function readEikJSONMaps(eikJSONPath) {
-    try {
-        const contents = await fs.promises.readFile(eikJSONPath);
-        const eikJSON = JSON.parse(contents);
-        if (typeof eikJSON['import-map'] === 'string') return [eikJSON['import-map']];
-        return eikJSON['import-map'] || [];
-    } catch (err) {
-        return [];
-    }
-}
+import { helpers } from '@eik/common';
 
 async function fetchImportMaps(urls = []) {
     try {
@@ -37,19 +25,16 @@ async function fetchImportMaps(urls = []) {
 }
 
 export async function load({
-    path = join(process.cwd(), 'eik.json'),
+    path = process.cwd(),
     maps = [],
     urls = [],
 } = {}) {
     const pMaps = Array.isArray(maps) ? maps : [maps];
     const pUrls = Array.isArray(urls) ? urls : [urls];
 
-    const importMapUrls = await readEikJSONMaps(path);
-    for (const map of importMapUrls) {
-        pUrls.push(map);
-    }
+    const config = await helpers.getDefaults(path);
 
-    const fetched = await fetchImportMaps(pUrls);
+    const fetched = await fetchImportMaps([...config.map, ...pUrls]);
     const mappings = pMaps.concat(fetched);
 
     await importMapPlugin.load(mappings);
