@@ -76,6 +76,7 @@ tap.test('plugin() - import map fetched from a URL', async (t) => {
 
     plugin.clear();
     await server.close();
+    await fs.promises.unlink(path.join(process.cwd(), 'eik.json'));
     t.end();
 });
 
@@ -174,5 +175,61 @@ tap.test('plugin() - import maps via eik.json, URLs and direct definitions', asy
     plugin.clear();
     await server.close();
     await fs.promises.unlink(path.join(process.cwd(), 'eik.json'));
+    t.end();
+});
+
+tap.test('plugin() - import maps via package.json, URLs and direct definitions', async (t) => {
+    const server = fastify();
+    server.get('/one', (request, reply) => {
+        reply.send({
+            imports: {
+                'lit-element': 'https://cdn.eik.dev/lit-element/v2',
+            },
+        });
+    });
+    server.get('/two', (request, reply) => {
+        reply.send({
+            imports: {
+                'lit-html': 'https://cdn.eik.dev/lit-html/v1',
+            },
+        });
+    });
+    const address = await server.listen();
+
+    const packageJSON = JSON.parse(await fs.promises.readFile(path.join(process.cwd(), 'package.json'), 'utf-8'));
+    packageJSON.eik = {
+        server: 'https://localhost',
+        files: './dist',
+        'import-map': `${address}/one`,
+    };
+    await fs.promises.writeFile(path.join(process.cwd(), 'package.json'), `${JSON.stringify(packageJSON, null, 2)}\n`);
+
+    await plugin.load({
+        maps: [{
+            imports: {
+                'lit-html/lit-html': 'https://cdn.eik.dev/lit-html/v2',
+            },
+        }],
+        urls: [`${address}/two`],
+    });
+
+    const result = await esbuild.build({
+        entryPoints: [file],
+        bundle: true,
+        format: 'esm',
+        minify: false,
+        sourcemap: false,
+        target: ['esnext'],
+        plugins: [plugin.plugin()],
+        write: false,
+    });
+
+    const code = bufferToString(result.outputFiles);
+    t.matchSnapshot(clean(code), 'import maps from eik.json, urls and direct definition');
+
+    plugin.clear();
+    await server.close();
+    delete packageJSON.eik;
+    await fs.promises.writeFile(path.join(process.cwd(), 'package.json'), `${JSON.stringify(packageJSON, null, 2)}\n`);
     t.end();
 });

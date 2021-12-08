@@ -64,3 +64,23 @@ export {
 };
 
 `
+
+exports[`test/plugin.js TAP plugin() - import maps via package.json, URLs and direct definitions > import maps from eik.json, urls and direct definition 1`] = `
+// fixtures/modules/file/main.js
+import {html} from "https://cdn.eik.dev/lit-html/v2";
+import {css} from "https://cdn.eik.dev/lit-html/v1";
+import {LitElement} from "https://cdn.eik.dev/lit-element/v2";
+var Inner = class extends LitElement {
+  static get styles() {
+    return [css\`:host { color: red; }\`];
+  }
+  render(world) {
+    return html\`<p>Hello \${world}!</p>\`;
+  }
+};
+var main_default = Inner;
+export {
+  main_default as default
+};
+
+`
