@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "test": "tap --no-coverage",
-    "test:snapshot": "TAP_SNAPSHOT=1 tap --no-esm test/*.js --no-coverage",
+    "test:snapshot": "TAP_SNAPSHOT=1 tap test/*.js --no-coverage",
     "lint": "eslint . --ext=js",
     "lint:fix": "eslint . --fix --ext=js"
   },
