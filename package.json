@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "test": "tap --no-coverage",
-    "test:snapshot": "TAP_SNAPSHOT=1 tap --no-esm test/*.js --no-coverage",
+    "test:snapshot": "TAP_SNAPSHOT=1 tap test/*.js --no-coverage",
     "lint": "eslint . --ext=js",
     "lint:fix": "eslint . --fix --ext=js"
   },
@@ -50,6 +50,7 @@
     "tap": "15.0.5"
   },
   "dependencies": {
+    "@eik/common": "^3.0.0",
     "esbuild-plugin-import-map": "2.1.0",
     "node-fetch": "2.6.6"
   }
