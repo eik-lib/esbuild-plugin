@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/eik-lib/esbuild-plugin/compare/v1.1.1...v1.1.2) (2022-01-25)
+
+
+### Bug Fixes
+
+* Replace node-fech with undici ([1610ae5](https://github.com/eik-lib/esbuild-plugin/commit/1610ae5d13c991f34c5bf47af8d0b26f9cb19f5d))
+
 ## [1.1.1](https://github.com/eik-lib/esbuild-plugin/compare/v1.1.0...v1.1.1) (2022-01-16)
 
 
