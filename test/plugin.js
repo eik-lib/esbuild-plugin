@@ -26,22 +26,23 @@ const bufferToString = (buff) => {
 };
 
 tap.test('plugin() - import map fetched from a URL', async (t) => {
-    const server = fastify();
-    server.get('/one', (request, reply) => {
+    const app = fastify();
+    app.server.keepAliveTimeout = 20;
+    app.get('/one', (request, reply) => {
         reply.send({
             imports: {
                 'lit-element': 'https://cdn.eik.dev/lit-element/v2',
             },
         });
     });
-    server.get('/two', (request, reply) => {
+    app.get('/two', (request, reply) => {
         reply.send({
             imports: {
                 'lit-html': 'https://cdn.eik.dev/lit-html/v1',
             },
         });
     });
-    const address = await server.listen();
+    const address = await app.listen();
 
     await fs.promises.writeFile(path.join(process.cwd(), 'eik.json'), JSON.stringify({
         name: 'test',
@@ -75,14 +76,15 @@ tap.test('plugin() - import map fetched from a URL', async (t) => {
     t.matchSnapshot(clean(code), 'import maps from urls');
 
     plugin.clear();
-    await server.close();
+    await app.close();
     await fs.promises.unlink(path.join(process.cwd(), 'eik.json'));
     t.end();
 });
 
 tap.test('plugin() - import map fetched from a URL via eik.json', async (t) => {
-    const server = fastify();
-    server.get('/one', (request, reply) => {
+    const app = fastify();
+    app.server.keepAliveTimeout = 20;
+    app.get('/one', (request, reply) => {
         reply.send({
             imports: {
                 'lit-element': 'https://cdn.eik.dev/lit-element/v2',
@@ -91,7 +93,7 @@ tap.test('plugin() - import map fetched from a URL via eik.json', async (t) => {
             },
         });
     });
-    const address = await server.listen();
+    const address = await app.listen();
 
     await fs.promises.writeFile(path.join(process.cwd(), 'eik.json'), JSON.stringify({
         name: 'test',
@@ -118,28 +120,29 @@ tap.test('plugin() - import map fetched from a URL via eik.json', async (t) => {
     t.matchSnapshot(clean(code), 'eik.json import-map string');
 
     plugin.clear();
-    await server.close();
+    await app.close();
     await fs.promises.unlink(path.join(process.cwd(), 'eik.json'));
     t.end();
 });
 
 tap.test('plugin() - import maps via eik.json, URLs and direct definitions', async (t) => {
-    const server = fastify();
-    server.get('/one', (request, reply) => {
+    const app = fastify();
+    app.server.keepAliveTimeout = 20;
+    app.get('/one', (request, reply) => {
         reply.send({
             imports: {
                 'lit-element': 'https://cdn.eik.dev/lit-element/v2',
             },
         });
     });
-    server.get('/two', (request, reply) => {
+    app.get('/two', (request, reply) => {
         reply.send({
             imports: {
                 'lit-html': 'https://cdn.eik.dev/lit-html/v1',
             },
         });
     });
-    const address = await server.listen();
+    const address = await app.listen();
 
     await fs.promises.writeFile(path.join(process.cwd(), 'eik.json'), JSON.stringify({
         name: 'test',
@@ -173,28 +176,29 @@ tap.test('plugin() - import maps via eik.json, URLs and direct definitions', asy
     t.matchSnapshot(clean(code), 'import maps from eik.json, urls and direct definition');
 
     plugin.clear();
-    await server.close();
+    await app.close();
     await fs.promises.unlink(path.join(process.cwd(), 'eik.json'));
     t.end();
 });
 
 tap.test('plugin() - import maps via package.json, URLs and direct definitions', async (t) => {
-    const server = fastify();
-    server.get('/one', (request, reply) => {
+    const app = fastify();
+    app.server.keepAliveTimeout = 20;
+    app.get('/one', (request, reply) => {
         reply.send({
             imports: {
                 'lit-element': 'https://cdn.eik.dev/lit-element/v2',
             },
         });
     });
-    server.get('/two', (request, reply) => {
+    app.get('/two', (request, reply) => {
         reply.send({
             imports: {
                 'lit-html': 'https://cdn.eik.dev/lit-html/v1',
             },
         });
     });
-    const address = await server.listen();
+    const address = await app.listen();
 
     const packageJSON = JSON.parse(await fs.promises.readFile(path.join(process.cwd(), 'package.json'), 'utf-8'));
     packageJSON.eik = {
@@ -228,7 +232,7 @@ tap.test('plugin() - import maps via package.json, URLs and direct definitions',
     t.matchSnapshot(clean(code), 'import maps from eik.json, urls and direct definition');
 
     plugin.clear();
-    await server.close();
+    await app.close();
     delete packageJSON.eik;
     await fs.promises.writeFile(path.join(process.cwd(), 'package.json'), `${JSON.stringify(packageJSON, null, 2)}\n`);
     t.end();
