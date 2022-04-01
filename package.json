@@ -43,7 +43,7 @@
     "eslint-plugin-import": "2.25.4",
     "fastify": "3.27.4",
     "semantic-release": "19.0.2",
-    "tap": "15.1.6"
+    "tap": "15.2.3"
   },
   "dependencies": {
     "@eik/common": "3.0.0",
