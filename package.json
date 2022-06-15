@@ -47,7 +47,7 @@
   },
   "dependencies": {
     "@eik/common": "3.0.1",
-    "esbuild-plugin-import-map": "2.1.0",
+    "esbuild-plugin-import-map": "3.0.0-next.1",
     "undici": "5.5.1"
   }
 }
