@@ -1,3 +1,15 @@
+# [2.0.0-next.1](https://github.com/eik-lib/esbuild-plugin/compare/v1.1.13...v2.0.0-next.1) (2022-06-15)
+
+
+### Features
+
+* Support full import map mapping ([8b3987c](https://github.com/eik-lib/esbuild-plugin/commit/8b3987c784991628ecf1e4d91943c84b5bfb17c2))
+
+
+### BREAKING CHANGES
+
+* Module should now be fully spec compliant. This might break builds due to parts of the import map implementation might have been following the spec.
+
 ## [1.1.13](https://github.com/eik-lib/esbuild-plugin/compare/v1.1.12...v1.1.13) (2022-06-15)
 
 
