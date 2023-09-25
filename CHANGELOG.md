@@ -1,3 +1,10 @@
+## [1.1.37](https://github.com/eik-lib/esbuild-plugin/compare/v1.1.36...v1.1.37) (2023-09-25)
+
+
+### Bug Fixes
+
+* **deps:** update dependency undici to v5.25.2 ([265e6c0](https://github.com/eik-lib/esbuild-plugin/commit/265e6c0ff55fab1c5ca9cdf3ffaf61f54a5c4bec))
+
 ## [1.1.36](https://github.com/eik-lib/esbuild-plugin/compare/v1.1.35...v1.1.36) (2023-09-11)
 
 
