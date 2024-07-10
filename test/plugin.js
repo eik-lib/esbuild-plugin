@@ -50,7 +50,7 @@ tap.test("plugin() - import map fetched from a URL", async (t) => {
       version: "1.0.0",
       files: "./dist",
       "import-map": `${address}/one`,
-    })
+    }),
   );
 
   await plugin.load({
@@ -106,7 +106,7 @@ tap.test("plugin() - import map fetched from a URL via eik.json", async (t) => {
       version: "1.0.0",
       files: "./dist",
       "import-map": `${address}/one`,
-    })
+    }),
   );
 
   await plugin.load();
@@ -160,7 +160,7 @@ tap.test(
         server: "https://localhost",
         files: "./dist",
         "import-map": `${address}/one`,
-      })
+      }),
     );
 
     await plugin.load({
@@ -188,14 +188,14 @@ tap.test(
     const code = bufferToString(result.outputFiles);
     t.matchSnapshot(
       clean(code),
-      "import maps from eik.json, urls and direct definition"
+      "import maps from eik.json, urls and direct definition",
     );
 
     plugin.clear();
     await app.close();
     await fs.promises.unlink(path.join(process.cwd(), "eik.json"));
     t.end();
-  }
+  },
 );
 
 tap.test(
@@ -222,8 +222,8 @@ tap.test(
     const packageJSON = JSON.parse(
       await fs.promises.readFile(
         path.join(process.cwd(), "package.json"),
-        "utf-8"
-      )
+        "utf-8",
+      ),
     );
     packageJSON.eik = {
       server: "https://localhost",
@@ -232,7 +232,7 @@ tap.test(
     };
     await fs.promises.writeFile(
       path.join(process.cwd(), "package.json"),
-      `${JSON.stringify(packageJSON, null, 2)}\n`
+      `${JSON.stringify(packageJSON, null, 2)}\n`,
     );
 
     await plugin.load({
@@ -260,7 +260,7 @@ tap.test(
     const code = bufferToString(result.outputFiles);
     t.matchSnapshot(
       clean(code),
-      "import maps from eik.json, urls and direct definition"
+      "import maps from eik.json, urls and direct definition",
     );
 
     plugin.clear();
@@ -268,8 +268,8 @@ tap.test(
     delete packageJSON.eik;
     await fs.promises.writeFile(
       path.join(process.cwd(), "package.json"),
-      `${JSON.stringify(packageJSON, null, 2)}\n`
+      `${JSON.stringify(packageJSON, null, 2)}\n`,
     );
     t.end();
-  }
+  },
 );

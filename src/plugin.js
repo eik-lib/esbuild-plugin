@@ -19,7 +19,7 @@ const fetchImportMaps = async (urls = []) => {
     return await Promise.all(maps);
   } catch (err) {
     throw new Error(
-      `Unable to load import map file from server: ${err.message}`
+      `Unable to load import map file from server: ${err.message}`,
     );
   }
 };
