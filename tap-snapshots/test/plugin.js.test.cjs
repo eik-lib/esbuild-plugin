@@ -12,7 +12,13 @@ import { css } from "https://cdn.eik.dev/lit-html/v1";
 import { LitElement } from "https://cdn.eik.dev/lit-element/v2";
 var Inner = class extends LitElement {
   static get styles() {
-    return [css\`:host { color: red; }\`];
+    return [
+      css\`
+        :host {
+          color: red;
+        }
+      \`
+    ];
   }
   render(world) {
     return html\`<p>Hello \${world}!</p>\`;
@@ -31,7 +37,13 @@ import { css } from "https://cdn.eik.dev/lit-html/v1";
 import { LitElement } from "https://cdn.eik.dev/lit-element/v2";
 var Inner = class extends LitElement {
   static get styles() {
-    return [css\`:host { color: red; }\`];
+    return [
+      css\`
+        :host {
+          color: red;
+        }
+      \`
+    ];
   }
   render(world) {
     return html\`<p>Hello \${world}!</p>\`;
@@ -50,7 +62,13 @@ import { css } from "https://cdn.eik.dev/lit-html/v1";
 import { LitElement } from "https://cdn.eik.dev/lit-element/v2";
 var Inner = class extends LitElement {
   static get styles() {
-    return [css\`:host { color: red; }\`];
+    return [
+      css\`
+        :host {
+          color: red;
+        }
+      \`
+    ];
   }
   render(world) {
     return html\`<p>Hello \${world}!</p>\`;
@@ -69,7 +87,13 @@ import { css } from "https://cdn.eik.dev/lit-html/v1";
 import { LitElement } from "https://cdn.eik.dev/lit-element/v2";
 var Inner = class extends LitElement {
   static get styles() {
-    return [css\`:host { color: red; }\`];
+    return [
+      css\`
+        :host {
+          color: red;
+        }
+      \`
+    ];
   }
   render(world) {
     return html\`<p>Hello \${world}!</p>\`;
