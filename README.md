@@ -11,17 +11,17 @@ $ npm install @eik/esbuild-plugin
 ## Usage
 
 ```js
-import * as eik from '@eik/esbuild-plugin';
-import esbuild from 'esbuild';
+import * as eik from "@eik/esbuild-plugin";
+import esbuild from "esbuild";
 
 await eik.load();
 
 await esbuild.build({
-    entryPoints: ['./src/app.js'],
-    bundle: true,
-    format: 'esm',
-    target: ['esnext'],
-    plugins: [eik.plugin()],
+	entryPoints: ["./src/app.js"],
+	bundle: true,
+	format: "esm",
+	target: ["esnext"],
+	plugins: [eik.plugin()],
 });
 ```
 
@@ -31,7 +31,7 @@ This plugin will read a local Eik config file (`eik.json`) and download the impo
 
 ### Plugin result
 
-Bundles will have bare imports mapped to absolute URLs. 
+Bundles will have bare imports mapped to absolute URLs.
 
 Ie. Something like this...
 
@@ -53,11 +53,11 @@ This module has the following API:
 
 Loads an Eik configuration or import maps directly for the plugn to use to apply.
 
-| option  | default        | type     | required | details                                                     |
-| ------- | -------------- | -------- | -------- | ----------------------------------------------------------- |
-| path    | `cwd/eik.json` | `string` | `false`  | Path to eik.json file.                                      |
-| urls    | `[]`           | `array`  | `false`  | Array of import map URLs to fetch from.                     |
-| maps    | `[]`           | `array`  | `false`  | Array of import map as objects.                             |
+| option | default        | type     | required | details                                 |
+| ------ | -------------- | -------- | -------- | --------------------------------------- |
+| path   | `cwd/eik.json` | `string` | `false`  | Path to eik.json file.                  |
+| urls   | `[]`           | `array`  | `false`  | Array of import map URLs to fetch from. |
+| maps   | `[]`           | `array`  | `false`  | Array of import map as objects.         |
 
 The plugin will attempt to read a `eik.json` from the current working directory of the Node.js process.
 
@@ -69,7 +69,7 @@ The path to the location of an `eik.json` file can be specified with the `path` 
 
 ```js
 await eik.load({
-    path: '/path/to/eik.json',
+	path: "/path/to/eik.json",
 });
 ```
 
@@ -77,7 +77,7 @@ The plugin can also load import maps directly from one or multiple URLs using th
 
 ```js
 await eik.load({
-    urls: ['http://myserver/import-maps/map.json'],
+	urls: ["http://myserver/import-maps/map.json"],
 });
 ```
 
@@ -85,11 +85,13 @@ Additionally, individual import maps can be specified using the `maps` option.
 
 ```js
 await eik.load({
-    maps: [{
-        imports: {
-            'lit-element': 'https://cdn.eik.dev/lit-element/v2',
-        }
-    }],
+	maps: [
+		{
+			imports: {
+				"lit-element": "https://cdn.eik.dev/lit-element/v2",
+			},
+		},
+	],
 });
 ```
 
@@ -99,13 +101,15 @@ ie. in the following example
 
 ```js
 await eik.load({
-    path: '/path/to/eik.json',
-    urls: ['http://myserver/import-maps/map.json'],
-    maps: [{
-        imports: {
-            'lit-element': 'https://cdn.eik.dev/lit-element/v2',
-        }
-    }],
+	path: "/path/to/eik.json",
+	urls: ["http://myserver/import-maps/map.json"],
+	maps: [
+		{
+			imports: {
+				"lit-element": "https://cdn.eik.dev/lit-element/v2",
+			},
+		},
+	],
 });
 ```
 
@@ -116,26 +120,28 @@ Any import map URLs in `eik.json` will be loaded first, then merged with (and ov
 Returns the plugin which will apply the loaded import maps during build. The returned plugin should be appended to the ESBuild plugin array.
 
 ```js
-import * as eik from '@eik/esbuild-plugin';
-import esbuild from 'esbuild';
+import * as eik from "@eik/esbuild-plugin";
+import esbuild from "esbuild";
 
 await eik.load();
 
-esbuild.build({
-    entryPoints: ['src/main.js'],
-    bundle: true,
-    format: 'esm',
-    minify: false,
-    sourcemap: false,
-    target: ['chrome58', 'firefox57', 'safari11', 'edge16'],
-    plugins: [eik.plugin()],
-    outfile: 'out.js',
-}).catch(() => process.exit(1))
+esbuild
+	.build({
+		entryPoints: ["src/main.js"],
+		bundle: true,
+		format: "esm",
+		minify: false,
+		sourcemap: false,
+		target: ["chrome58", "firefox57", "safari11", "edge16"],
+		plugins: [eik.plugin()],
+		outfile: "out.js",
+	})
+	.catch(() => process.exit(1));
 ```
 
 ### .clear()
 
-Clears the loaded import maps from the plugins internal cache. 
+Clears the loaded import maps from the plugins internal cache.
 
 ## License
 
