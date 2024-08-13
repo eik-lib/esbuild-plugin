@@ -1,11 +1,11 @@
 # @eik/esbuild-plugin
 
-ESBuild plugin for loading import maps from a [Eik server](https://eik.dev/) and applying the mapping to ECMAScript modules in preparation for upload to the same server.
+[esbuild](https://esbuild.github.io/) plugin for [build-time import mapping with Eik](https://eik.dev/docs/guides/esbuild).
 
 ## Installation
 
 ```bash
-$ npm install @eik/esbuild-plugin
+npm install --save-dev esbuild @eik/esbuild-plugin
 ```
 
 ## Usage
@@ -14,35 +14,30 @@ $ npm install @eik/esbuild-plugin
 import * as eik from "@eik/esbuild-plugin";
 import esbuild from "esbuild";
 
-await eik.load();
-
-await esbuild.build({
-	entryPoints: ["./src/app.js"],
-	bundle: true,
+const options = /** @type {esbuild.BuildOptions}*/ ({
+	entryPoints: ["./src/index.js"],
+	outdir: "./public",
 	format: "esm",
-	target: ["esnext"],
-	plugins: [eik.plugin()],
+	platform: "browser",
+	target: ["es2017"],
+	bundle: true,
+	sourcemap: true,
 });
-```
 
-## Description
-
-This plugin will read a local Eik config file (`eik.json`) and download the import maps from the Eik server defined in the config. The downloaded import maps will then be applied to the ECMAScript modules being processed.
-
-### Plugin result
-
-Bundles will have bare imports mapped to absolute URLs.
-
-Ie. Something like this...
-
-```js
-import { LitElement, html, css } from "lit-element";
-```
-
-Will be mapped to something like this...
-
-```js
-import { LitElement, html, css } from "https://cdn.eik.dev/lit-element/v2";
+const watch = process.argv.includes("--dev");
+if (watch) {
+	let ctx = await esbuild.context(options);
+	await ctx.watch();
+	console.log("[esbuild] watching...");
+} else {
+	// Use the Eik plugin to to import mapping for the production build
+	// Load the import maps listed in eik.json from the Eik server
+	await eik.load();
+	await esbuild.build({
+		...options,
+		plugins: [eik.plugin()],
+	});
+}
 ```
 
 ## API
@@ -117,7 +112,7 @@ Any import map URLs in `eik.json` will be loaded first, then merged with (and ov
 
 ### .plugin()
 
-Returns the plugin which will apply the loaded import maps during build. The returned plugin should be appended to the ESBuild plugin array.
+Returns the plugin which will apply the loaded import maps during build. The returned plugin should be appended to the esbuild plugin array.
 
 ```js
 import * as eik from "@eik/esbuild-plugin";
@@ -132,7 +127,7 @@ esbuild
 		format: "esm",
 		minify: false,
 		sourcemap: false,
-		target: ["chrome58", "firefox57", "safari11", "edge16"],
+		target: ["es2017"],
 		plugins: [eik.plugin()],
 		outfile: "out.js",
 	})
@@ -142,25 +137,3 @@ esbuild
 ### .clear()
 
 Clears the loaded import maps from the plugins internal cache.
-
-## License
-
-Copyright (c) 2020 Finn.no
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
