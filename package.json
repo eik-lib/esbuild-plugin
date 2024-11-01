@@ -53,7 +53,7 @@
     "rimraf": "6.0.1",
     "semantic-release": "24.2.0",
     "tap": "20.0.3",
-    "typescript": "5.5.4"
+    "typescript": "5.6.3"
   },
   "dependencies": {
     "@eik/common": "3.0.1",
