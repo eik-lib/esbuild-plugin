@@ -1,3 +1,11 @@
+## [1.1.51](https://github.com/eik-lib/esbuild-plugin/compare/v1.1.50...v1.1.51) (2025-03-24)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @eik/common to v5 ([e882bdd](https://github.com/eik-lib/esbuild-plugin/commit/e882bdd6a96b6f756b09a87b4006e848729ee79d))
+* **deps:** update dependency undici to v7 ([5b967bd](https://github.com/eik-lib/esbuild-plugin/commit/5b967bd8ea0d96074b1a7f4082f0e0eef44fc916))
+
 ## [1.1.50](https://github.com/eik-lib/esbuild-plugin/compare/v1.1.49...v1.1.50) (2025-03-24)
 
 
