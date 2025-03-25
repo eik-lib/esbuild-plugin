@@ -1,3 +1,10 @@
+## [1.1.52](https://github.com/eik-lib/esbuild-plugin/compare/v1.1.51...v1.1.52) (2025-03-25)
+
+
+### Bug Fixes
+
+* regression in fetching aliased import maps ([4a49aed](https://github.com/eik-lib/esbuild-plugin/commit/4a49aed9dbd9575e0335bc1e14a6e838ae23d64b))
+
 ## [1.1.51](https://github.com/eik-lib/esbuild-plugin/compare/v1.1.50...v1.1.51) (2025-03-24)
 
 
