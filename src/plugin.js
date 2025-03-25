@@ -1,6 +1,5 @@
 import * as importMapPlugin from "esbuild-plugin-import-map";
 import { helpers } from "@eik/common";
-import { request } from "undici";
 
 /**
  * @typedef {object} ImportMap
@@ -14,16 +13,17 @@ import { request } from "undici";
 const fetchImportMaps = async (urls = []) => {
 	try {
 		const maps = urls.map(async (map) => {
-			const { statusCode, body } = await request(map, { maxRedirections: 2 });
+			const response = await fetch(map);
 
-			if (statusCode === 404) {
+			if (response.status === 404) {
 				throw new Error("Import map could not be found on server");
-			} else if (statusCode >= 400 && statusCode < 500) {
+			} else if (response.status >= 400 && response.status < 500) {
 				throw new Error("Server rejected client request");
-			} else if (statusCode >= 500) {
+			} else if (response.status >= 500) {
 				throw new Error("Server error");
 			}
-			return /** @type {Promise<ImportMap>} */ (body.json());
+
+			return /** @type {Promise<ImportMap>} */ (response.json());
 		});
 		return await Promise.all(maps);
 	} catch (err) {
