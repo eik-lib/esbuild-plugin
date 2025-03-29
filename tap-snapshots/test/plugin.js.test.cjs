@@ -5,6 +5,31 @@
  * Make sure to inspect the output below.  Do not ignore changes!
  */
 'use strict'
+exports[`test/plugin.js > TAP > plugin() - direct definitions import should override fetched import maps > import maps from direct definition 1`] = `
+// fixtures/modules/file/main.js
+import { html } from "https://cdn.eik.dev/lit-html/v3";
+import { css } from "https://cdn.eik.dev/lit-html/v1";
+import { LitElement } from "https://cdn.eik.dev/lit-element/v2";
+var Inner = class extends LitElement {
+  static get styles() {
+    return [
+      css\`
+        :host {
+          color: red;
+        }
+      \`
+    ];
+  }
+  render(world) {
+    return html\`<p>Hello \${world}!</p>\`;
+  }
+};
+export {
+  Inner as default
+};
+
+`
+
 exports[`test/plugin.js > TAP > plugin() - import map fetched from a URL > import maps from urls 1`] = `
 // fixtures/modules/file/main.js
 import { html } from "https://cdn.eik.dev/lit-html/v2";
