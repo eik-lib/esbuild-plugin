@@ -23,6 +23,71 @@ const bufferToString = (buff) => {
 	return str.join("");
 };
 
+tap.test(
+	"plugin() - direct definitions import should override fetched import maps",
+	async (t) => {
+		const app = fastify();
+		app.server.keepAliveTimeout = 20;
+		app.get("/one", (request, reply) => {
+			reply.send({
+				imports: {
+					"lit-element": "https://cdn.eik.dev/lit-element/v2",
+				},
+			});
+		});
+		app.get("/two", (request, reply) => {
+			reply.send({
+				imports: {
+					"lit-html": "https://cdn.eik.dev/lit-html/v1",
+					"lit-html/lit-html": "https://cdn.eik.dev/lit-html/v2",
+				},
+			});
+		});
+		const address = await app.listen();
+
+		await fs.promises.writeFile(
+			path.join(process.cwd(), "eik.json"),
+			JSON.stringify({
+				name: "test",
+				server: "https://localhost",
+				version: "1.0.0",
+				files: "./dist",
+				"import-map": `${address}/one`,
+			}),
+		);
+
+		await plugin.load({
+			maps: [
+				{
+					imports: {
+						"lit-html/lit-html": "https://cdn.eik.dev/lit-html/v3",
+					},
+				},
+			],
+			urls: [`${address}/one`, `${address}/two`],
+		});
+
+		const result = await esbuild.build({
+			entryPoints: [file],
+			bundle: true,
+			format: "esm",
+			minify: false,
+			sourcemap: false,
+			target: ["esnext"],
+			plugins: [plugin.plugin()],
+			write: false,
+		});
+
+		const code = bufferToString(result.outputFiles);
+		t.matchSnapshot(clean(code), "import maps from direct definition");
+
+		plugin.clear();
+		await app.close();
+		await fs.promises.unlink(path.join(process.cwd(), "eik.json"));
+		t.end();
+	},
+);
+
 tap.test("plugin() - import map fetched from a URL", async (t) => {
 	const app = fastify();
 	app.server.keepAliveTimeout = 20;
