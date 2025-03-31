@@ -1,3 +1,10 @@
+## [1.1.53](https://github.com/eik-lib/esbuild-plugin/compare/v1.1.52...v1.1.53) (2025-03-31)
+
+
+### Bug Fixes
+
+* `maps` overrides should take priority ([#197](https://github.com/eik-lib/esbuild-plugin/issues/197)) ([ee447c7](https://github.com/eik-lib/esbuild-plugin/commit/ee447c7fa44dd557ae39efb396319c8a76de28fd))
+
 ## [1.1.52](https://github.com/eik-lib/esbuild-plugin/compare/v1.1.51...v1.1.52) (2025-03-25)
 
 
