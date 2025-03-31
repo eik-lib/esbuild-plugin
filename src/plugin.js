@@ -68,7 +68,7 @@ export async function load({
 	const config = await helpers.getDefaults(path);
 
 	const fetched = await fetchImportMaps([...config.map, ...pUrls]);
-	const mappings = pMaps.concat(fetched);
+	const mappings = fetched.concat(pMaps);
 
 	await importMapPlugin.load(mappings);
 }
