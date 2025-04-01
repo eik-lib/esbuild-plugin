@@ -42,7 +42,7 @@
   "devDependencies": {
     "@eik/eslint-config": "1.0.12",
     "@eik/prettier-config": "1.0.1",
-    "@eik/semantic-release-config": "1.0.0",
+    "@eik/semantic-release-config": "1.0.2",
     "@eik/typescript-config": "1.0.0",
     "@types/esbuild-plugin-import-map": "0.0.3",
     "esbuild": "0.24.2",
