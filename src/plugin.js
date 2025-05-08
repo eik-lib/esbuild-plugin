@@ -7,33 +7,6 @@ import { helpers } from "@eik/common";
  */
 
 /**
- * @param {string[]} urls
- * @returns {Promise<ImportMap[]>}
- */
-const fetchImportMaps = async (urls = []) => {
-	try {
-		const maps = urls.map(async (map) => {
-			const response = await fetch(map);
-
-			if (response.status === 404) {
-				throw new Error("Import map could not be found on server");
-			} else if (response.status >= 400 && response.status < 500) {
-				throw new Error("Server rejected client request");
-			} else if (response.status >= 500) {
-				throw new Error("Server error");
-			}
-
-			return /** @type {Promise<ImportMap>} */ (response.json());
-		});
-		return await Promise.all(maps);
-	} catch (err) {
-		throw new Error(
-			`Unable to load import map file from server: ${err.message}`,
-		);
-	}
-};
-
-/**
  * @typedef {object} LoadOptions
  * @property {string} [path=process.cwd()]
  * @property {string[]} [urls=[]] URLs to import maps hosted on an Eik server. Takes precedence over `eik.json`.
@@ -65,9 +38,9 @@ export async function load({
 	const pMaps = Array.isArray(maps) ? maps : [maps];
 	const pUrls = Array.isArray(urls) ? urls : [urls];
 
-	const config = await helpers.getDefaults(path);
+	const config = helpers.getDefaults(path);
 
-	const fetched = await fetchImportMaps([...config.map, ...pUrls]);
+	const fetched = await helpers.fetchImportMaps([...config.map, ...pUrls]);
 	const mappings = fetched.concat(pMaps);
 
 	await importMapPlugin.load(mappings);
