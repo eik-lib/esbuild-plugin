@@ -1,3 +1,15 @@
+# [2.0.0](https://github.com/eik-lib/esbuild-plugin/compare/v1.1.54...v2.0.0) (2025-05-08)
+
+
+### Bug Fixes
+
+* update eik/common and use shared map fetcher ([#203](https://github.com/eik-lib/esbuild-plugin/issues/203)) ([50dc45c](https://github.com/eik-lib/esbuild-plugin/commit/50dc45cea7fb5fb9dec03fb0ddac8a7867b0db42))
+
+
+### BREAKING CHANGES
+
+* Drop support for Node 18.
+
 ## [1.1.54](https://github.com/eik-lib/esbuild-plugin/compare/v1.1.53...v1.1.54) (2025-04-28)
 
 
