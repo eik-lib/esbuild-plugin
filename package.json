@@ -57,7 +57,7 @@
     "typescript": "5.7.2"
   },
   "dependencies": {
-    "@eik/common": "5.1.5",
+    "@eik/common": "5.1.6",
     "esbuild-plugin-import-map": "2.1.0"
   },
   "engines": {
