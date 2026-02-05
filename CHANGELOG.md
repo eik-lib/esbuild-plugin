@@ -1,3 +1,10 @@
+## [2.0.9](https://github.com/eik-lib/esbuild-plugin/compare/v2.0.8...v2.0.9) (2026-02-05)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @eik/common to v5.1.15 ([#233](https://github.com/eik-lib/esbuild-plugin/issues/233)) ([0b650a4](https://github.com/eik-lib/esbuild-plugin/commit/0b650a468dd0fcb48be6a366ea8d4009ec266994))
+
 ## [2.0.8](https://github.com/eik-lib/esbuild-plugin/compare/v2.0.7...v2.0.8) (2026-01-12)
 
 
