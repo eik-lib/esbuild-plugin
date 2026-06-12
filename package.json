@@ -46,7 +46,7 @@
     "@eik/typescript-config": "1.0.1",
     "@types/esbuild-plugin-import-map": "0.0.3",
     "@types/node": "24.10.1",
-    "esbuild": "0.27.3",
+    "esbuild": "0.28.1",
     "eslint": "9.39.4",
     "fastify": "5.8.5",
     "npm-run-all2": "8.0.4",
