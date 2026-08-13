@@ -1,3 +1,11 @@
+## [2.0.20](https://github.com/eik-lib/esbuild-plugin/compare/v2.0.19...v2.0.20) (2026-08-13)
+
+
+### Bug Fixes
+
+* upgrade TypeScript to 7 and fix tsconfig for TS7 breaking changes ([17055eb](https://github.com/eik-lib/esbuild-plugin/commit/17055eb395a5dd319ee91fcd25a8aee962b78f64))
+* use type-strip-only tap config to skip ts-node with TypeScript 7 ([3483a9e](https://github.com/eik-lib/esbuild-plugin/commit/3483a9eca3310d4228bde2c3481decddc6527acb))
+
 ## [2.0.19](https://github.com/eik-lib/esbuild-plugin/compare/v2.0.18...v2.0.19) (2026-06-22)
 
 
